@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pihole
+  namespace: pihole-system
+  labels:
+    app:  pihole
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app:  pihole
+  template:
+    metadata:
+      labels:
+        app: pihole
+    spec:
+      containers:
+      - name:  pihole-cloudflared
+        image: visibilityspots/cloudflared:amd64
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+      - name: pihole-core
+        image: pihole/pihole
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        env:
+        - name: TZ
+          valueFrom:
+            configMapKeyRef:
+              name: pihole-env
+              key: TZ
+        - name: DNS1
+          valueFrom:
+            configMapKeyRef:
+              name: pihole-env
+              key: DNS1
+        - name: DNS2
+          valueFrom:
+            configMapKeyRef:
+              name: pihole-env
+              key: DNS2
+        ports:
+        - name: web
+          containerPort: 80
+        - name : dns
+          protocol : UDP
+          containerPort: 53
+        volumeMounts:
+        - name: pihole-adlists
+          mountPath: /etc/pihole/adlists.list
+          subPath: adlists.list
+        - name: pihole-regex
+          mountPath: /etc/pihole/regex.list
+          subPath: regex.list
+      volumes:
+        - name: pihole-adlists
+          configMap:
+            name: pihole-adlists
+        - name: pihole-regex
+          configMap: 
+            name: pihole-regex
