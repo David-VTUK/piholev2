@@ -11,6 +11,17 @@ data:
     https://s3.amazonaws.com/lists.disconnect.me/simple_tracking.txt
     https://s3.amazonaws.com/lists.disconnect.me/simple_ad.txt
     https://hosts-file.net/ad_servers.txt
+    https://blocklist.site/app/dl/ads 
+    https://blocklist.site/app/dl/fraud 
+    https://blocklist.site/app/dl/fakenews 
+    https://blocklist.site/app/dl/malware 
+    https://blocklist.site/app/dl/phishing 
+    https://blocklist.site/app/dl/ransomware 
+    https://blocklist.site/app/dl/scam 
+    https://blocklist.site/app/dl/spam 
+    https://blocklist.site/app/dl/facebook 
+    https://blocklist.site/app/dl/youtube
+    
 ---
 apiVersion: v1
 kind: ConfigMap
