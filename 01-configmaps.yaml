@@ -21,7 +21,6 @@ data:
     https://blocklist.site/app/dl/spam 
     https://blocklist.site/app/dl/facebook 
     https://blocklist.site/app/dl/youtube
-    
 ---
 apiVersion: v1
 kind: ConfigMap
