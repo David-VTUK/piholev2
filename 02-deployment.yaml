@@ -26,7 +26,7 @@ spec:
             memory: "128Mi"
             cpu: "500m"
       - name: pihole-core
-        image: pihole/pihole
+        image: pihole/pihole:v4.4
         resources:
           requests:
             memory: "64Mi"
